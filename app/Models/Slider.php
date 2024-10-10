@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'title',
+        'subtitle',
+        'img'
+    ];
+
+    protected $casts = [
+        'title' => 'array',
+        'subtitle' => 'array',
+    ];
+    public $timestamps = true;
 }
