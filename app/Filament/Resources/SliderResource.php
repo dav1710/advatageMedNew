@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
@@ -26,7 +27,17 @@ class SliderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Textarea::make('title')
+                Forms\Components\TextInput::make('title.en')
+                    ->label('English Title')
+                    ->required(),
+                Forms\Components\TextInput::make('title.ru')
+                    ->label('Russian Title')
+                    ->required(),
+                Forms\Components\TextInput::make('title.am')
+                    ->label('Armenian Title')
+                    ->required(),
+                Forms\Components\TextInput::make('title.es')
+                    ->label('Espanol Title')
                     ->required(),
                 Forms\Components\Textarea::make('subtitle')
                     ->required(),
@@ -47,6 +58,7 @@ class SliderResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('img')->disk('public')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('title.en'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
