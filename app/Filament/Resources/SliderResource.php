@@ -29,20 +29,35 @@ class SliderResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title.en')
                     ->label('English Title')
+                    ->columnSpan('1/4')
                     ->required(),
                 Forms\Components\TextInput::make('title.ru')
                     ->label('Russian Title')
-                    ->required(),
+                    ->columnSpan('1/4'),
                 Forms\Components\TextInput::make('title.am')
                     ->label('Armenian Title')
-                    ->required(),
+                    ->columnSpan('1/4'),
                 Forms\Components\TextInput::make('title.es')
                     ->label('Espanol Title')
+                    ->columnSpan('1/4'),
+                Forms\Components\TextInput::make('subtitle.en')
+                    ->label('English Subtitle')
+                    ->columnSpan('1/4')
                     ->required(),
-                Forms\Components\Textarea::make('subtitle')
-                    ->required(),
+                Forms\Components\TextInput::make('subtitle.ru')
+                    ->label('Russian Subtitle')
+                    ->columnSpan('1/4'),
+                Forms\Components\TextInput::make('subtitle.am')
+                    ->label('Armenian Subtitle')
+                    ->columnSpan('1/4'),
+                Forms\Components\TextInput::make('subtitle.es')
+                    ->label('Espanol Subtitle')
+                    ->columnSpan('1/4'),
                 Forms\Components\FileUpload::make('img')
                     ->image()
+                    ->imageResizeMode('cover')
+                    ->imageResizeTargetWidth('1600')
+                    ->imageResizeTargetHeight('830')
                     ->directory('sliders')
                     ->visibility('public')
                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {

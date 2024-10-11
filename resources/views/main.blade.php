@@ -61,21 +61,6 @@
 </div>
 <!-- End Preloader -->
 
-<!-- Get Pro Button -->
-<ul class="pro-features">
-    <a class="get-pro" href="#">Get Pro</a>
-    <li class="big-title">Pro Version Available on Themeforest</li>
-    <li class="title">Pro Version Features</li>
-    <li>2+ premade home pages</li>
-    <li>20+ html pages</li>
-    <li>Color Plate With 12+ Colors</li>
-    <li>Sticky Header / Sticky Filters</li>
-    <li>Working Contact Form With Google Map</li>
-    <div class="button">
-        <a href="http://preview.themeforest.net/item/mediplus-medical-and-doctor-html-template/full_screen_preview/26665910?_ga=2.145092285.888558928.1591971968-344530658.1588061879" target="_blank" class="btn">Pro Version Demo</a>
-        <a href="https://themeforest.net/item/mediplus-medical-and-doctor-html-template/26665910" target="_blank" class="btn">Buy Pro Version</a>
-    </div>
-</ul>
 
 <!-- Header Area -->
 <header class="header" >
@@ -91,6 +76,16 @@
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">FAQ</a></li>
                     </ul>
+                    <form action="{{ route('locale.change') }}" method="POST">
+                        @csrf
+                        <select name="locale" onchange="this.form.submit()">
+                            <option value="en"{{ session('locale', app()->getLocale()) == 'en' ? ' selected' : '' }}>English</option>
+                            <option value="am"{{ session('locale', app()->getLocale()) == 'am' ? ' selected' : '' }}>Armenian</option>
+                            <option value="ru"{{ session('locale', app()->getLocale()) == 'ru' ? ' selected' : '' }}>Russia</option>
+                            <option value="es"{{ session('locale', app()->getLocale()) == 'es' ? ' selected' : '' }}>Espanol</option>
+                            <!-- Additional language options -->
+                        </select>
+                    </form>
                     <!-- End Contact -->
                 </div>
                 <div class="col-lg-6 col-md-7 col-12">
@@ -102,6 +97,7 @@
                     <!-- End Top Contact -->
                 </div>
             </div>
+
         </div>
     </div>
     <!-- End Topbar -->
@@ -109,7 +105,7 @@
     <div class="header-inner">
         <div class="container">
             <div class="inner">
-                <div class="row">
+                <div class="row header-row">
                     <div class="col-lg-3 col-md-3 col-12">
                         <!-- Start Logo -->
                         <div class="logo">
@@ -165,59 +161,26 @@
 <section class="slider">
     <div class="hero-slider">
         <!-- Start Single Slider -->
-        <div class="single-slider" style="background-image:url('img/slider2.jpg')">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <div class="text">
-                            <h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
-                            <div class="button">
-                                <a href="#" class="btn">Get Appointment</a>
-                                <a href="#" class="btn primary">Learn More</a>
+        @foreach ($sliders as $slider)
+            <!-- Start Single Slider -->
+            <div class="single-slider" style="background-image:url('{{ asset('storage/' . $slider['img']) }}')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="text">
+                                <h1>{!! $slider->title[app()->getLocale()] ?? $slider->title['en'] !!}</h1>
+                                <p>{!! $slider->subtitle[app()->getLocale()] ?? $slider->title['en'] !!}</p>
+                                <div class="button">
+                                    <a href="#" class="btn">Get Appointment</a>
+                                    <a href="#" class="btn primary">Contact Now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End Single Slider -->
-        <!-- Start Single Slider -->
-        <div class="single-slider" style="background-image:url('img/slider.jpg')">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <div class="text">
-                            <h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
-                            <div class="button">
-                                <a href="#" class="btn">Get Appointment</a>
-                                <a href="#" class="btn primary">About Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Start End Slider -->
-        <!-- Start Single Slider -->
-        <div class="single-slider" style="background-image:url('img/slider3.jpg')">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <div class="text">
-                            <h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
-                            <div class="button">
-                                <a href="#" class="btn">Get Appointment</a>
-                                <a href="#" class="btn primary">Conatct Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Single Slider -->
+            <!-- End Single Slider -->
+        @endforeach
     </div>
 </section>
 <!--/ End Slider Area -->

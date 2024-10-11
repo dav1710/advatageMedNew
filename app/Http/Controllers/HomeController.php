@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function home()
     {
-        return view('main');
+        $sliders = Slider::all();
+        return view('main')
+            ->with('sliders', $sliders);
     }
 }

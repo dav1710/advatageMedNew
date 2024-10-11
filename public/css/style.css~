@@ -302,7 +302,7 @@ body{
 	width:100%;
 }
 .header-row{
-    align-items: center;
+    
 }
 .get-quote .btn{
 	color:#fff;
